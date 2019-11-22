@@ -67,7 +67,7 @@
         android:layout_marginRight="167dp"
         android:layout_marginBottom="30dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/pause_button" />
+        app:srcCompat="@drawable/pausee" />
 
     <SeekBar
         android:id="@+id/seeBarSong"

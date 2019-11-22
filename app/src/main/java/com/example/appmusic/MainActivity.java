@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,9 +31,62 @@ public class MainActivity extends AppCompatActivity {
 
         AnhXa();
         AddSong();
+        KhoiTaoMediaPlayer();
 
-        mediaPlayer = MediaPlayer.create(MainActivity.this, arraySong.get(position).getFile());
-        txtTitle.setText(arraySong.get(position).getTitle());
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                position++;
+                if (position > arraySong.size() - 1){
+                    position = 0 ;
+                }
+                if (mediaPlayer.isPlaying()){
+                    mediaPlayer.stop();
+                }
+                btnNext.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        position++;
+                        if (position > arraySong.size() - 1){
+                            position = 0 ;
+                        }
+                        if (mediaPlayer.isPlaying()){
+                            mediaPlayer.stop();
+                        }
+                        KhoiTaoMediaPlayer();
+                        mediaPlayer.start();
+                        btnPlay.setImageResource(R.drawable.pause_button);
+                        SetTimeTotal();
+                    }
+                });
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                position--;
+                if (position < 0){
+                    position = arraySong.size() -1;
+                }
+                if (mediaPlayer.isPlaying()){
+                    mediaPlayer.stop();
+                }
+                KhoiTaoMediaPlayer();
+                mediaPlayer.start();
+                SetTimeTotal();
+            }
+        });
+
+        btnPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.pause();
+                mediaPlayer.release();
+                btnPlay.setImageResource(R.drawable.play_arrow);
+                KhoiTaoMediaPlayer();
+            }
+        });
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,16 +98,53 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     // đang ngừng phát -> đổi hình pause
                     mediaPlayer.start();
-                    btnPlay.setImageResource(R.drawable.play_arrow);
+
                 }
+                SetTimeTotal();
+            }
+        });
+
+        skSong.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(skSong.getProgress());
             }
         });
     }
+
+    private void SetTimeTotal(){
+        SimpleDateFormat dinhDangGio = new SimpleDateFormat("mm:ss");
+
+        txtTimeSong.setText(dinhDangGio.format(mediaPlayer.getDuration())+ "");
+
+        // gán max cảu skSong = mediaPlayer.getDuration()
+        skSong.setMax(mediaPlayer.getDuration());
+    }
+
+    private void KhoiTaoMediaPlayer(){
+        mediaPlayer = MediaPlayer.create(MainActivity.this, arraySong.get(position).getFile());
+        txtTitle.setText(arraySong.get(position).getTitle());
+    }
+
     private void AddSong(){
         arraySong = new ArrayList<>();
         arraySong.add(new Song("Chúng ta không thuộc về nhau",R.raw.chung_ta_khong_thuoc_ve_nhau));
+        arraySong.add(new Song("Cơn mưa ngang qua",R.raw.con_mua_ngang_qua));
         arraySong.add(new Song("Em của ngày hôm qua",R.raw.em_cua_ngay_hom_qua));
+        arraySong.add(new Song("Mãi mãi bên nhau",R.raw.mai_mai_ben_nhau));
+        arraySong.add(new Song("Nắng ấm xa dần",R.raw.nang_am_xa_dan));
         arraySong.add(new Song("Như ngày hôm qua",R.raw.nhu_ngay_hom_qua));
+
 
     }
     private void AnhXa(){
