@@ -16,6 +16,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:onClick="tvYeuThich"
+        android:layout_marginTop="60dp"
+        android:id="@+id/tvYeuThich"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Yêu Thích"
+        android:textSize="24dp" />
+
+    <TextView
+        android:onClick="tvCaSy"
+        android:layout_marginTop="120dp"
+        android:id="@+id/tvCaSy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Ca sỹ"
+        android:textSize="24dp" />
 
     <ImageButton
         android:id="@+id/btnNext"
