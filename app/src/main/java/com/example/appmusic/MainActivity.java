@@ -129,6 +129,19 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
+                        position++;
+                        if (position > arraySong.size() - 1){
+                            position = 0 ;
+                        }
+                        if (mediaPlayer.isPlaying()){
+                            mediaPlayer.stop();
+
+                            KhoiTaoMediaPlayer();
+                            mediaPlayer.start();
+                            btnPlay.setImageResource(R.drawable.pause_button);
+                            SetTimeTotal();
+                            UpdateTimeSong();
+                        }
 
                     }
                 });
