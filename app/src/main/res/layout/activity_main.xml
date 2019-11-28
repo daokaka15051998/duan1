@@ -38,8 +38,8 @@
 
     <ImageButton
         android:id="@+id/btnNext"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -51,8 +51,8 @@
 
     <ImageButton
         android:id="@+id/btnBack"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -64,8 +64,8 @@
 
     <ImageButton
         android:id="@+id/btnPlay"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -76,9 +76,9 @@
         app:srcCompat="@drawable/play_arrow" />
 
     <ImageButton
-        android:id="@+id/btnPause"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:id="@+id/btnStop"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -86,7 +86,7 @@
         android:layout_marginRight="167dp"
         android:layout_marginBottom="30dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/pausee" />
+        app:srcCompat="@drawable/stop" />
 
     <SeekBar
         android:id="@+id/seeBarSong"
@@ -96,6 +96,21 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="87dp" />
+
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="338dp"
+        android:layout_marginRight="338dp"
+        android:layout_marginBottom="113dp"
+        android:text="00:00"
+        android:textColor="#fff"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv2"
@@ -111,18 +126,16 @@
         android:textColor="#fff"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="277dp"
+        android:layout_height="275dp"
+        android:layout_above="@+id/seeBarSong"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="338dp"
-        android:layout_marginRight="338dp"
-        android:layout_marginBottom="113dp"
-        android:text="00:00"
-        android:textColor="#fff"
-        android:textSize="20sp" />
+        android:layout_marginEnd="67dp"
+        android:layout_marginRight="67dp"
+        android:layout_marginBottom="120dp"
+        app:srcCompat="@drawable/CD" />
 
 </RelativeLayout>

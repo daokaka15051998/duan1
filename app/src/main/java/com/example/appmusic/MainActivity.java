@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -15,9 +16,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txtTitle, txtTimeSong,txtTotal;
+    TextView txtTitle, txtTimeSong,txtTimeTotal;
     SeekBar skSong;
-    ImageButton btnNext,btnBack,btnPlay,btnPause;
+    ImageButton btnNext,btnBack,btnPlay,btnStop;
 
 
     ArrayList<Song> arraySong;
@@ -43,23 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (mediaPlayer.isPlaying()){
                     mediaPlayer.stop();
+
+                    KhoiTaoMediaPlayer();
+                    mediaPlayer.start();
+                    btnPlay.setImageResource(R.drawable.pause_button);
+                    SetTimeTotal();
+                    UpdateTimeSong();
                 }
-                btnNext.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        position++;
-                        if (position > arraySong.size() - 1){
-                            position = 0 ;
-                        }
-                        if (mediaPlayer.isPlaying()){
-                            mediaPlayer.stop();
-                        }
-                        KhoiTaoMediaPlayer();
-                        mediaPlayer.start();
-                        btnPlay.setImageResource(R.drawable.pause_button);
-                        SetTimeTotal();
-                    }
-                });
             }
         });
 
@@ -76,13 +67,14 @@ public class MainActivity extends AppCompatActivity {
                 KhoiTaoMediaPlayer();
                 mediaPlayer.start();
                 SetTimeTotal();
+                UpdateTimeSong();
             }
         });
 
-        btnPause.setOnClickListener(new View.OnClickListener() {
+        btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mediaPlayer.pause();
+                mediaPlayer.stop();
                 mediaPlayer.release();
                 btnPlay.setImageResource(R.drawable.play_arrow);
                 KhoiTaoMediaPlayer();
@@ -95,13 +87,14 @@ public class MainActivity extends AppCompatActivity {
                 if (mediaPlayer.isPlaying()){
                     // nếu đang phát -> pause -> đổi hình play
                     mediaPlayer.pause();
-                    btnPlay.setImageResource(R.drawable.pause_button);
+                    btnPlay.setImageResource(R.drawable.play_arrow);
                 }else {
                     // đang ngừng phát -> đổi hình pause
                     mediaPlayer.start();
-
+                    btnPlay.setImageResource(R.drawable.pause_button);
                 }
                 SetTimeTotal();
+                UpdateTimeSong();
             }
         });
 
@@ -121,6 +114,27 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.seekTo(skSong.getProgress());
             }
         });
+    }
+
+    private void UpdateTimeSong(){
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SimpleDateFormat dinhDangGio = new SimpleDateFormat("mm:ss");
+                txtTimeSong.setText(dinhDangGio.format(mediaPlayer.getCurrentPosition()));
+                skSong.setProgress(mediaPlayer.getCurrentPosition());
+
+                // kiem tra thoi gian bai hat neu ket thuc thi next
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+
+                    }
+                });
+                handler.postDelayed(this, 500);
+           }
+        }, 100);
     }
 
     private void SetTimeTotal(){
@@ -150,13 +164,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void AnhXa(){
         txtTimeSong = (TextView) findViewById(R.id.tv1);
-        txtTimeSong = (TextView) findViewById(R.id.tv2);
+        txtTimeTotal = (TextView)findViewById(R.id.tv2);
         txtTitle = (TextView) findViewById(R.id.tvTenBaiHat);
         skSong = (SeekBar) findViewById(R.id.seeBarSong);
         btnNext = (ImageButton) findViewById(R.id.btnNext);
         btnPlay = (ImageButton) findViewById(R.id.btnPlay);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
-        btnPause = (ImageButton) findViewById(R.id.btnPause);
+        btnStop = (ImageButton) findViewById(R.id.btnStop);
 
     }
 
