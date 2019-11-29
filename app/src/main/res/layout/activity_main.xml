@@ -136,6 +136,6 @@
         android:layout_marginEnd="67dp"
         android:layout_marginRight="67dp"
         android:layout_marginBottom="120dp"
-        app:srcCompat="@drawable/cd" />
+        app:srcCompat="@drawable/compact" />
 
 </RelativeLayout>

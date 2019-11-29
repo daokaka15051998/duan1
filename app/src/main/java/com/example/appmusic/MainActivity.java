@@ -7,9 +7,14 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.example.appmusic.model.Song;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,12 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
     TextView txtTitle, txtTimeSong,txtTimeTotal;
     SeekBar skSong;
+    ImageView imgHinh;
     ImageButton btnNext,btnBack,btnPlay,btnStop;
 
 
     ArrayList<Song> arraySong;
-    int position = 1;
+    int position = 0;
     MediaPlayer mediaPlayer;
+    Animation animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
         AnhXa();
         AddSong();
+
+        animation = AnimationUtils.loadAnimation(this,R.anim.disc_rotate);
+
         KhoiTaoMediaPlayer();
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 SetTimeTotal();
                 UpdateTimeSong();
+                imgHinh.startAnimation(animation);
             }
         });
 
@@ -184,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
         btnPlay = (ImageButton) findViewById(R.id.btnPlay);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnStop = (ImageButton) findViewById(R.id.btnStop);
+        imgHinh = (ImageView) findViewById(R.id.imageView);
 
     }
 
