@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     private void SetTimeTotal(){
         SimpleDateFormat dinhDangGio = new SimpleDateFormat("mm:ss");
 
-        txtTimeSong.setText(dinhDangGio.format(mediaPlayer.getDuration())+ "");
+        txtTimeTotal.setText(dinhDangGio.format(mediaPlayer.getDuration())+ "");
 
         // gán max cảu skSong = mediaPlayer.getDuration()
         skSong.setMax(mediaPlayer.getDuration());
@@ -179,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         arraySong = new ArrayList<>();
         arraySong.add(new Song("Chúng ta không thuộc về nhau",R.raw.chung_ta_khong_thuoc_ve_nhau));
         arraySong.add(new Song("Cơn mưa ngang qua",R.raw.con_mua_ngang_qua));
+        arraySong.add(new Song("Cô thắm không về",R.raw.cotham_khongve));
         arraySong.add(new Song("Em của ngày hôm qua",R.raw.em_cua_ngay_hom_qua));
         arraySong.add(new Song("Mãi mãi bên nhau",R.raw.mai_mai_ben_nhau));
         arraySong.add(new Song("Nắng ấm xa dần",R.raw.nang_am_xa_dan));
